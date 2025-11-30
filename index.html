@@ -5,6 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donation Platform - Public Page</title>
   <style>
+    .subscription-bar {
+    background: rgba(255, 255, 255, 0.85);
+    margin: 40px auto;
+    width: 90%;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scroll-text {
+    white-space: nowrap;
+    display: inline-block;
+    animation: scroll 15s linear infinite;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6f61;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .subscribe-btn {
+    display: inline-block;
+    background: #ff6f61;
+    color: white;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+
+  .subscribe-btn:hover {
+    background: #e74c3c;
+  }
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
@@ -91,10 +130,25 @@
 </head>
 <body>
 
+  
   <header>
-    <h1>Welcome to the Donation Platform</h1>
-    <p>Together, we can help communities during emergencies</p>
+    <h1> HopeConnect</h1>
+
+    <h3>Together, we can help communities during emergencies</h3>
+
+    <p style="font-size: 1.1rem; font-weight: bold; margin-top: 5px; color: #ffe7e7;">
+      ⏳ Time of Donations: Food | Clothes | Funds 
+    </p>
   </header>
+  <div class="subscription-bar">
+  <div class="scroll-text">
+    ❤️ Support the Needy Monthly — Contribute just ₹50 / ₹100 / ₹200 every month  
+    👉 <a href="donate-money.html" class="subscribe-btn">Click Here to Subscribe</a>
+  </div>
+</div>
+
+
+
 
   <div class="welcome-bar">
     🌟 Be a donor, make a difference. Sign up or log in to start! 🌟

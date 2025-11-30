@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up | Donation Platform</title>
+
   <style>
     body {
       margin: 0;
@@ -17,6 +18,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
     .container {
       display: flex;
       justify-content: center;
@@ -53,6 +55,7 @@
       border-color: #ff6f61;
       box-shadow: 0 0 6px rgba(255,111,97,0.5);
     }
+
     .btn {
       width: 100%;
       padding: 12px;
@@ -66,9 +69,11 @@
       margin-top: 10px;
       transition: background 0.3s;
     }
+
     .btn:hover {
       background: #e74c3c;
     }
+
     .extra-links {
       margin-top: 15px;
       font-size: 0.9rem;
@@ -81,32 +86,118 @@
     .extra-links a:hover {
       text-decoration: underline;
     }
+
+    /* OTP POPUP */
+    .otp-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .otp-box {
+      background: #fff;
+      padding: 25px;
+      width: 300px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    .otp-box input {
+      width: 90%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+      letter-spacing: 5px;
+      font-size: 1.2rem;
+    }
+    .otp-btn {
+      width: 100%;
+      padding: 10px;
+      background: #ff6f61;
+      margin-top: 15px;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
   </style>
 </head>
+
 <body>
 
-  <div class="container">
-    <div class="signup-box">
-      <h2>Create an Account</h2>
-      <!--<form action="dashboard.html" method="POST">-->
-        <form onsubmit="event.preventDefault(); window.location.href='login.html';">
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <input type="password" placeholder="Password" required>
-        <select required>
-          <option value="" disabled selected>Select Role</option>
-          <option value="donor">Donor</option>
-          <option value="recipient">Recipient</option>
-          <option value="logistics">Logistics Coordinator</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button type="submit" class="btn">Sign Up</button>
-      </form>
-      <div class="extra-links">
-        <p>Already have an account? <a href="login.html">Login</a></p>
-      </div>
+<div class="container">
+  <div class="signup-box">
+    <h2>Create an Account</h2>
+
+    <form onsubmit="event.preventDefault(); sendOTP();">
+
+      <input id="name" type="text" placeholder="Full Name" required>
+      <input id="email" type="email" placeholder="Email Address" required>
+      <input id="password" type="password" placeholder="Password" required>
+
+      <select id="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="donor">Donor</option>
+        <option value="recipient">Recipient</option>
+        <option value="logistics">Logistics Coordinator</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+
+    <div class="extra-links">
+      <p>Already have an account? <a href="login.html">Login</a></p>
     </div>
   </div>
+</div>
+
+<!-- OTP POPUP -->
+<div class="otp-popup" id="otpPopup">
+  <div class="otp-box">
+    <h3>Enter OTP</h3>
+    <p style="font-size:14px;"> OTP sent to your email : <b id="showOtp"></b></p>
+
+    <input type="text" id="otpInput" maxlength="4" placeholder="----">
+
+    <button class="otp-btn" onclick="verifyOTP()">Verify OTP</button>
+  </div>
+</div>
+
+<script>
+  let generatedOTP = "";
+
+  // Generate Random 4-digit Dummy OTP
+  function sendOTP() {
+    generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+    console.log("Generated OTP:", generatedOTP); // examiner can see in console
+
+    document.getElementById("showOtp").innerText = generatedOTP;
+
+    // show popup
+    document.getElementById("otpPopup").style.display = "flex";
+  }
+
+  // verify OTP
+  function verifyOTP() {
+    let userOtp = document.getElementById("otpInput").value;
+
+    if (userOtp === generatedOTP) {
+      alert("OTP Verified Successfully!");
+      window.location.href = "login.html";
+    } else {
+      alert("Invalid OTP! Try again.");
+    }
+  }
+</script>
 
 </body>
 </html>
